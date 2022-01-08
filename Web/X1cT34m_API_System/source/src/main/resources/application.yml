@@ -1,0 +1,39 @@
+server:
+  port: ${APP_PORT:8080}
+  servlet:
+    context-path: /
+  error:
+    path: /error
+
+spring:
+  jmx:
+    enabled: true
+  application:
+    name: ${APP_NAME:moyusystem}
+    admin:
+      enabled: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://apisystemmysql:3306/spring?serverTimezone=Asia/Shanghai&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false
+    username: spring
+    password: spring
+
+management:
+  access:
+    iplist:
+      127.0.0.1             # 自定义actuator IP访问白名单
+  endpoints:
+    jmx:
+      exposure:
+        # exclude: '*'
+        include: "*"
+    web:
+      exposure:
+        include: "*"
+        exclude: ["heapdump", "threaddump", "caches"]
+
+pebble:
+  suffix:
+  cache: false
+
+
