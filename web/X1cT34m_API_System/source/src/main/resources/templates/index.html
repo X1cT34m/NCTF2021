@@ -1,0 +1,15 @@
+{% extends "_base.html" %}
+
+{% block main %}
+
+{% if 1 == 1 %}
+<h3>Welcome to X1cT34m moyu System!</h3>
+<div style="max-width: 100%">
+    <img src="/static/img/index.png" alt="index" style="max-width: 100%;max-height: 100%;display: block;margin: auto;">
+</div>
+<p>Please <a href="/signin">Sign In</a> or <a href="/register">Register</a>
+{% else %}
+<h3>Welcome {{ user.name }}!</h3>
+{% endif %}
+
+{% endblock %}
