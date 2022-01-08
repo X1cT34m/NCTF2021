@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Secure Note Storage</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css" />
+</head>
+<body>
+<nav class="navbar navbar-dark navbar-expand-md bg-dark">
+    <div class="container-fluid justify-content-center">
+        <a class="navbar-brand">
+            <i class="fas fa-lock"></i>Protected Note
+            <i class="fas fa-lock"></i>
+        </a>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h4 class="text-center mt-5">Hello, your safely stored note is:</h4>
+            <h1 class="text-center mt-5" id="note"></h1>
+            <h5 class="text-center mt-5">Security Status:
+                <span class="text-success">Protected with CSP, anti-XSS and sandbox<i class="fas fa-check"></i></span>
+            </h5>
+        </div>
+    </div>
+    <footer class="text-center mt-5">
+        <small><br>©&nbsp;NCTF 2021</small>
+    </footer>
+</div>
+<script nonce="{{.CSPNonce}}">
+    window.addEventListener('message', (e) => {
+        if( e.data.type == "note" && e.origin == "{{ .Site }}"){
+            document.getElementById("note").innerHTML = e.data.content;
+            let content = document.getElementById("note").textContent
+            const result = {
+                "userNote.content": content,
+                "userNote.number": content.length,
+                "userNote.status": content.length > 0 ? "healthy": "ready"
+            }
+            parent.postMessage(result, "*")
+        }
+    });
+</script>
+</body>
+</html>
