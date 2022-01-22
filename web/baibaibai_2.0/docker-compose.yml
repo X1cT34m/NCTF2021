@@ -1,0 +1,9 @@
+version: "2"
+services:
+  web:
+    build: .
+    image: baibaibai_2.0
+    ports:
+      - "8086:80"
+    environment:
+      - FLAG=nctf{m1saka_wanna_marry_liyuu_}
