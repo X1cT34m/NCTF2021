@@ -1,0 +1,10 @@
+version: "2"
+
+services:
+  rsa:
+    build: .
+    restart: always
+    image: crypto/rsa
+    ports:
+      - "0.0.0.0:10002:10002"
+        
