@@ -1,0 +1,22 @@
+version: '3'
+services: 
+  node: 
+    build: .
+    container_name: pretty_js
+    restart: always
+    networks:
+      - prettyjs
+  nginx:
+    image: nginx:alpine
+    restart: always
+    ports:
+      - "0.0.0.0:443:443"
+    volumes:
+      - "./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro"
+      - "./nginx/credential.pem:/etc/nginx/credential.pem:ro"
+      - "./nginx/credential.key:/etc/nginx/credential.key:ro"
+    networks:
+      - prettyjs
+
+networks:
+  prettyjs: {}
